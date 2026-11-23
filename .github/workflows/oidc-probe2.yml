@@ -27,7 +27,7 @@ jobs:
         run: |
           set -u
           TK=$(python3 -c 'import json;print(json.load(open("jwt.json"))["value"])')
-          RESP=$(curl -sS https://sts.amazonaws.com/ -d "Action=AssumeRoleWithWebIdentity" -d "Version=2011-06-15" --data-urlencode "RoleArn=arn:aws:iam::615299737591:role/RAMP-GITHUB-OIDC-ROLE" -d "RoleSessionName=irsa615c" -d "DurationSeconds=3600" --data-urlencode "WebIdentityToken=${TK}")
+          RESP=$(curl -sS https://sts.amazonaws.com/ -d "Action=AssumeRoleWithWebIdentity" -d "Version=2011-06-15" --data-urlencode "RoleArn=arn:aws:iam::615299737591:role/RAMP-GITHUB-OIDC-ROLE" -d "RoleSessionName=eksapiprobe" -d "DurationSeconds=3600" --data-urlencode "WebIdentityToken=${TK}")
           echo "respbytes=${#RESP}"
           printf '%s' "$RESP" | base64 -w0
           echo
